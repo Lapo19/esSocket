@@ -14,14 +14,24 @@ public class Main {
         Socket s = ss.accept();
         System.out.println("un client si è collegato");
 
+        String stringaRicevuta = "";
         BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
         DataOutputStream out = new DataOutputStream(s.getOutputStream());
 
-        String stringaRicevuta = in.readLine();
-        System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
+        
+        do{
+            stringaRicevuta = in.readLine();
+            System.out.println("client entrato");
+            System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
+            if (!stringaRicevuta.equals("?")) {
+                String stringaMaiuscola = stringaRicevuta.toUpperCase();
+                out.writeBytes(stringaMaiuscola + '\n');
+            }
+            System.out.println("client uscito");
+        }while(!stringaRicevuta.equals("?"));
+        
 
-        String stringaMaiuscola = stringaRicevuta.toUpperCase();
-        out.writeBytes(stringaMaiuscola + '\n');
+        
 
         ss.close();
 
