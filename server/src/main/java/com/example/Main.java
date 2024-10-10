@@ -21,14 +21,15 @@ public class Main {
         
         do{
             stringaRicevuta = in.readLine();
-            System.out.println("client entrato");
-            System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
-            if (!stringaRicevuta.equals("?")) {
+            
+            if (!stringaRicevuta.equals("exit")) {
+                System.out.println("client entrato");
+                System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
                 String stringaMaiuscola = stringaRicevuta.toUpperCase();
                 out.writeBytes(stringaMaiuscola + '\n');
             }
             System.out.println("client uscito");
-        }while(!stringaRicevuta.equals("?"));
+        }while(!stringaRicevuta.equals("exit"));
         
 
         

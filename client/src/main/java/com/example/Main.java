@@ -21,12 +21,13 @@ public class Main {
 
         do{
         stringa = sc.nextLine();
+        if(!stringa.equals("exit")){
         out.writeBytes(stringa + '\n');
-
         String stringaRicevuta = in.readLine();
         System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
+        }
 
-        }while(!stringa.equals("exit!"));
+        }while(!stringa.equals("exit"));
         System.out.println("client finito");
         s.close();
 
