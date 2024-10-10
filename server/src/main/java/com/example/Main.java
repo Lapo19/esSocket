@@ -11,31 +11,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("server partito");
         ServerSocket ss = new ServerSocket(3000);
-        Socket s = ss.accept();
-        System.out.println("un client si è collegato");
-
-        String stringaRicevuta = "";
-        BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-        DataOutputStream out = new DataOutputStream(s.getOutputStream());
-
-        
-        do{
-            stringaRicevuta = in.readLine();
-            
-            if (!stringaRicevuta.equals("exit")) {
-                System.out.println("client entrato");
-                System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
-                String stringaMaiuscola = stringaRicevuta.toUpperCase();
-                out.writeBytes(stringaMaiuscola + '\n');
-            }
-            System.out.println("client uscito");
-        }while(!stringaRicevuta.equals("exit"));
-        
-
-        
-
-        ss.close();
-
-        System.out.println("server finito");
+        while(true){
+            Socket mioS = ss.accept();
+            MioThread m = new MioThread(mioS);
+            m.start();
+        }
     }
 }
