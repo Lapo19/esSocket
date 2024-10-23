@@ -15,22 +15,39 @@ public class MioThread extends Thread{
     public void run(){
         try{
             System.out.println("un client si è collegato");
-    String stringaRicevuta = "";
-    BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
-    DataOutputStream out = new DataOutputStream(s.getOutputStream());
+            String stringaOpzione = "";
+            BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            DataOutputStream out = new DataOutputStream(s.getOutputStream());
 
     
     do{
-        stringaRicevuta = in.readLine();
+        stringaOpzione = in.readLine();
+        String stringa = "";
         
-        if (!stringaRicevuta.equals("exit")) {
-            System.out.println("client entrato");
-            System.out.println("La stringa ricevuta è: "+ stringaRicevuta);
-            String stringaMaiuscola = stringaRicevuta.toUpperCase();
-            out.writeBytes(stringaMaiuscola + '\n');
+        if (!stringaOpzione.equals("5")) {
+            String stringaFrase= in.readLine();
+            switch (stringaOpzione) {
+                case "1":
+                    stringa = stringaFrase.toUpperCase();
+                break;
+            
+                case "2":
+                    stringa = stringaFrase.toLowerCase();
+                break;
+
+                case "3":
+                    StringBuilder str = new StringBuilder(stringaFrase);
+                    stringa = str.reverse().toString();
+                    out.writeBytes(stringa + '\n');
+                break;
+
+                case "4":
+                    stringa= "" + stringaFrase.length();
+                break;
+            }
+            out.writeBytes(stringa + '\n');
         }
-        System.out.println("client uscito");
-    }while(!stringaRicevuta.equals("exit"));
+    }while(!stringaOpzione.equals("5"));
         }
         catch(Exception e){
 
